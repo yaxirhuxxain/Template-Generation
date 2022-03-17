@@ -240,6 +240,9 @@ class ReformerLSTM(nn.Module):
             loss = self.loss_fn(
                 logits.view(-1, logits.size(-1)), labels.view(-1))
 
+        if not loss:
+            return logits
+        
         return SequenceClassifierOutput(
             loss=loss,
             logits=logits,
